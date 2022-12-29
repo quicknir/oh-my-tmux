@@ -267,8 +267,9 @@ tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
+#tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
 #tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{pretty_pane_current_path} "
+tmux_conf_theme_status_left=" ❐ #S |#{prefix}"
 tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
 
 # status left style
@@ -410,8 +411,28 @@ bind E command-prompt -p "Command:" \
        "run \"tmux list-panes -a -F '##{session_name}:##{window_index}.##{pane_index}' \
               | xargs -I PANE tmux send-keys -t PANE '%1' Enter\""
 
+# Unused and the Up binding was annoying due to repeat mode when wanting to quickly rerun last
+# command in another terminal
+unbind Up
+unbind Down
+unbind Left
+unbind Right
+
+# Note the absence of -r; repeat just not worth it for these, too error prone
+bind h select-pane -L  # move left
+bind j select-pane -D  # move down
+bind k select-pane -U  # move up
+bind l select-pane -R  # move right
+
+
+
+
 # move status line to top
 set -g status-position top
+
+# This is how we can distinguish focused from unfocused panes, but needs more work
+#set -g window-style 'fg=colour247,bg=colour236'
+#set -g window-active-style 'fg=colour250,bg=black'
 
 
 # -- tpm -----------------------------------------------------------------------
