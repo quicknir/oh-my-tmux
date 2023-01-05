@@ -424,7 +424,9 @@ bind j select-pane -D  # move down
 bind k select-pane -U  # move up
 bind l select-pane -R  # move right
 
-
+# Makes cursor/prompt start at the bottom of the window; more consistent
+# (not sure if I'm keeping it yet)
+set-option -g default-command 'tput cup "$(tput lines)"; exec "$SHELL" -l' 
 
 
 # move status line to top
