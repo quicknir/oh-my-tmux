@@ -451,6 +451,9 @@ set -g status-position top
 #set -g window-style 'fg=colour247,bg=colour236'
 #set -g window-active-style 'fg=colour250,bg=black'
 
+# See detailed explanation in my_rc.zsh above the definition of the code function
+set-option -ga update-environment VSCODE_IPC_HOOK_CLI
+
 
 # -- tpm -----------------------------------------------------------------------
 
