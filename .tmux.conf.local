@@ -453,6 +453,7 @@ set -g status-position top
 
 # See detailed explanation in my_rc.zsh above the definition of the code function
 set-option -ga update-environment VSCODE_IPC_HOOK_CLI
+set-option -ga update-environment VSCODE_GIT_IPC_HANDLE
 
 
 # -- tpm -----------------------------------------------------------------------
