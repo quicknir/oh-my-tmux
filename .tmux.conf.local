@@ -399,13 +399,14 @@ bind C-a send-prefix
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind c new-window -c '#{pane_current_path}' #!important
 
-
 bind n new-window
 bind "\\" split-window -h # tmux vertical/horizontal is backwards
 bind "-" split-window -v # tmux vertical/horizontal is backwards
-bind R source-file ~/.tmux.conf \; display '~/.tmux.conf sourced'
-bind-key r command-prompt -I "#W" "rename-window '%%'"
+
+# Rebind source tmux conf from r to R; copied from .tmux.conf
+bind R run "sh -c '\"\$TMUX_PROGRAM\" \${TMUX_SOCKET:+-S \"\$TMUX_SOCKET\"} source \"\$TMUX_CONF\"'" \; display "#{TMUX_CONF} sourced"
 bind r command-prompt "rename-window '%%'"
+
 # Merge current pane into ith window
 bind m command-prompt "join-pane -t '%%'"
 
@@ -468,12 +469,12 @@ set-option -ga update-environment VSCODE_GIT_IPC_HANDLE
 # by default, launching tmux will update tpm and all plugins
 #   - true (default)
 #   - false
-tmux_conf_update_plugins_on_launch=true
+tmux_conf_update_plugins_on_launch=false
 
 # by default, reloading the configuration will update tpm and all plugins
 #   - true (default)
 #   - false
-tmux_conf_update_plugins_on_reload=true
+tmux_conf_update_plugins_on_reload=false
 
 # by default, reloading the configuration will uninstall tpm and plugins when no
 # plugins are enabled
@@ -497,6 +498,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 #set -g @plugin 'tmux-plugins/tmux-continuum'
 #set -g @continuum-restore 'on'
 
+set -g @plugin 'laktak/extrakto'
 
 # -- custom variables ----------------------------------------------------------
 
